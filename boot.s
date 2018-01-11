@@ -2,10 +2,10 @@
 .set ALIGN,     1<<0                /* align loaded modules on page boundaries */
 .set MEMINFO,   1<<1                /* provide memory map */
 .set FLAGS,     ALIGN | MEMINFO     /* Multiboot flag field */
-.set MAGIC,     0x1BADB002          /* 'magic number' MULTIBOOT1 */
-.set CHECKSUM,  -(MAGIC + FLAGS)    /* checksum to provide we're multiboot */
+.set MAGIC,     0x1BADB002          /* 'magic number' for MULTIBOOT1 */
+.set CHECKSUM,  -(MAGIC + FLAGS)    /* checksum to provide we are in multiboot */
 
-/* First 8KiB of the kernel file, aligned at a 32-bit boundary. */
+/* First 8KiB of the kernel file, aligned 32-bit boundary. */
 .section .multiboot
 .align 4
 .long MAGIC
@@ -14,7 +14,7 @@
 
 /* Stack implementation
     its a x86 implementation so, size = 16384bytes
-    it also contains its top and bottom to make kernel-panic properly
+    it also contains its top and bottom to make kernel-panic work properly
 */
 .section        .bss
 .align          16
@@ -22,7 +22,7 @@ stack_bottom:
 .skip           16384 # 16KiB
 stack_top:
 
-/* entrypoint of kernel, after bootloader finish his job */
+/* entrypoint of the kernel, after bootloader finish its job */
 .section        .text
 .global         _start
 .type           _start, @function
@@ -52,7 +52,7 @@ _start:
       */
 
       /* enter High-level kernel.
-       * it will require 16-byte stack alligned since there
+       * it will require 16-byte stack aligned since there
        */
       call kernel_main
 
@@ -60,17 +60,17 @@ _start:
       after kernel_main finishes its work, put CPU into infinite loop
       it requires:
         Disabling interrupts with cli (clear interrupt enable in flags).
-        //they're alredy disabled by bootloader
+        //they are alredy disabled by bootloader
         Wait for the next interrupt to arrive with halt instruction
         Jump to the halt instruction.
       */
 
-      cli
+      cli ;disable interrupts
 1:    hlt
       jmp 1b
 
 /*
 Set the size of the _start symbol to the current location '.' minus its start.
-This is usefull when debugging or when you implement call tracing.
+This is useful when debugging or when you implement call tracing.
 */
 .size _start, . - _start
