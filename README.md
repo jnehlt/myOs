@@ -7,11 +7,7 @@ Simple Operating system, created to understand how Os-es actually works.
 
 |Filename    |Description                       |
 |------------|----------------------------------|
-|boot.s      |<ul><li>This file sets many [things](https://www.gnu.org/software/grub/manual/multiboot/html_node/boot_002eS.html)</li>
-                  <li>like grub Multiboot Header,</li>
-                  <li>implements stack for x86,</li>
-                  <li>sets entrypoint of kernel,</li>
-                  <li>Load kernel, etc.</li>
+|boot.s      |<ul><li>This file sets many [things](https://www.gnu.org/software/grub/manual/multiboot/html_node/boot_002eS.html)</li><li>like grub Multiboot Header,</li><li>implements stack for x86,</li><li>sets entrypoint of kernel,</li><li>Load kernel, etc.</li>
                   <li>In near future i plan to implement</li>
                   <li> *Interrupts*</li>
                   <li> *Paging*</li>
