@@ -7,20 +7,20 @@ Simple Operating system, created to understand how Os-es actually works.
 
 |Filename    |Description                       |
 |------------|----------------------------------|
-|            |This file sets many [things](https://www.gnu.org/software/grub/manual/multiboot/html_node/boot_002eS.html)|
-|            |like grub Multiboot Header,       |
-|            |implements stack for x86,         |
-|            |sets entrypoint of kernel,        |
-|            |Load kernel, etc.                 |
-|            |In near future i plan to implement|
-|            | *Interrupts*                     |
-|            | *Paging*                         |
-|boot.s      | *Fully Initialize CPU*           |
-|            | *libc*                           |
-|            | *floating point instructions*    |
-|            | *security*                       |
-|            | *safeguards*                     |
-|            | *debug*                          |
-|            | *GDT*                            |
-|            | *runtime support for Cxx*        |
-|            |                                  |
+|boot.s      |<ul><li>This file sets many [things](https://www.gnu.org/software/grub/manual/multiboot/html_node/boot_002eS.html)</li>
+                  <li>like grub Multiboot Header,</li>
+                  <li>implements stack for x86,</li>
+                  <li>sets entrypoint of kernel,</li>
+                  <li>Load kernel, etc.</li>
+                  <li>In near future i plan to implement</li>
+                  <li> *Interrupts*</li>
+                  <li> *Paging*</li>
+                  <li> *Fully Initialize CPU*</li>
+                  <li> *libc*</li>
+                  <li> *floating point instructions*</li>
+                  <li> *security*</li>
+                  <li> *safeguards*</li>
+                  <li> *debug*</li>
+                  <li> *GDT*</li>
+                  <li> *runtime support for Cxx*</li>
+                </ul>
