@@ -7,7 +7,7 @@
 
 size_t strlen(const char* str);
 void terminal_init(void);
-void terminal_refresh(void);
+void terminal_scroll_without_buffering(size_t lines);
 void terminal_setcolor(uint8_t color);
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
 void terminal_putchar(char c);
@@ -83,17 +83,20 @@ terminal_init(void)
 }
 
 void
-terminal_refresh(void)
+terminal_scroll_without_buffering(size_t lines)
 {
+    if(lines == 0) return;
+    /* if(lines < 0) { terminal_rewind(lines); return; } for future use. */
+
     for(size_t y = 0; y < VGA_HEIGHT; ++y)
     {
         for(size_t x = 0; x < VGA_WIDTH; ++x)
         {
             const size_t index = y * VGA_WIDTH + x;
-            if(y == VGA_HEIGHT - 1)
+            if(y == VGA_HEIGHT - lines)
                 terminal.buffer[index] = vga_entry(' ', terminal.color);
             else
-                terminal.buffer[index] = terminal.buffer[index + VGA_WIDTH];
+                terminal.buffer[index] = terminal.buffer[index + VGA_WIDTH - 1];
         }
     }
 }
@@ -117,32 +120,39 @@ terminal_putchar(char c)
     if(c == '\n')
     {
         terminal.column = 0;
-        if(++terminal.row == VGA_HEIGHT)
-            terminal_refresh();
+        ++terminal.row;
     }
 
-    else if(c == '\t')
-    {
-        if(terminal.column + 3 >= VGA_WIDTH)
-        {
-            terminal.column = 0;
-            if(++terminal.row == VGA_HEIGHT)
-                terminal_refresh();
-        }
-        else
-            terminal.column += 3;
-    }
+    // else if(c == '\t')
+    // {
+    //     if(terminal.column + 3 >= VGA_WIDTH)
+    //     {
+    //         terminal.column = 0;
+    //         if(++terminal.row == VGA_HEIGHT)
+    //             terminal_scroll();
+    //     }
+    //     else
+    //         terminal.column += 3;
+    // }
 
     else
     {
         terminal_putentryat(c, terminal.color, terminal.column, terminal.row);
     }
 
-    if(++terminal.column == VGA_WIDTH)
+    if(++terminal.column >= VGA_WIDTH)
     {
         terminal.column = 0;
-        if(++terminal.row == VGA_HEIGHT)
-            terminal_refresh();
+        if(++terminal.row >= VGA_HEIGHT)
+        {
+            terminal_scroll_without_buffering(1 /* line */ );
+            --terminal.row;
+        }
+    }
+    else if(terminal.row >= VGA_HEIGHT)
+    {
+        terminal_scroll_without_buffering(terminal.row - (VGA_HEIGHT - 1));
+        terminal.row = terminal.row - (VGA_HEIGHT - 1);
     }
 }
 
@@ -165,5 +175,30 @@ kernel_main(void)
 {
     terminal_init();
 
-    terminal_writestring("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26");
+    terminal_writestring("11111111111111111111111111111111111111111111111111111111111111111111111111111111\n\
+22222222222222222222222222222222222222222222222222222222222222222222222222222222\n\
+33333333333333333333333333333333333333333333333333333333333333333333333333333333\n\
+44444444444444444444444444444444444444444444444444444444444444444444444444444444\n\
+55555555555555555555555555555555555555555555555555555555555555555555555555555555\n\
+66666666666666666666666666666666666666666666666666666666666666666666666666666666\n\
+77777777777777777777777777777777777777777777777777777777777777777777777777777777\n\
+88888888888888888888888888888888888888888888888888888888888888888888888888888888\n\
+99999999999999999999999999999999999999999999999999999999999999999999999999999999\n\
+10101010101010101010101010101010101010101010101010101010101010101010101010101010\n\
+11111111111111111111111111111111111111111111111111111111111111111111111111111111\n\
+12121212121212121212121212121212121212121212121212121212121212121212121212121212\n\
+13131313131313131313131313131313131313131313131313131313131313131313131313131313\n\
+14141414141414141414141414141414141414141414141414141414141414141414141414141414\n\
+15151515151515151515151515151515151515151515151515151515151515151515151515151515\n\
+16161616161616161616161616161616161616161616161616161616161616161616161616161616\n\
+17171717171717171717171717171717171717171717171717171717171717171717171717171717\n\
+18181818181818181818181818181818181818181818181818181818181818181818181818181818\n\
+19191919191919191919191919191919191919191919191919191919191919191919191919191919\n\
+20202020202020202020202020202020202020202020202020202020202020202020202020202020\n\
+21212121212121212121212121212121212121212121212121212121212121212121212121212121\n\
+22222222222222222222222222222222222222222222222222222222222222222222222222222222\n\
+23232323232323232323232323232323232323232323232323232323232323232323232323232323\n\
+24242424242424242424242424242424242424242424242424242424242424242424242424242424\n\
+25252525252525252525252525252525252525252525252525252525252525252525252525252525\n\
+26262626262626262626262626262626262626262626262626262626262626262626262626262626");
 }
