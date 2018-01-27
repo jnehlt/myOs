@@ -65,7 +65,7 @@ _start:
         Jump to the halt instruction.
       */
 
-      cli ;disable interrupts
+      cli /*disable interrupts*/
 1:    hlt
       jmp 1b
 
