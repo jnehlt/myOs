@@ -16,4 +16,4 @@ Simple Operating system, created for my own pleasure, just to understand how Os-
 -Terminal is almost finished</br>
   ---I added debug and log section - i will use it in future </br>
   ---also made some useful functions (will describe it later)</br>
--Now time to implement GDT and IDT</br>
+-Now is time to implement GDT and IDT</br>
