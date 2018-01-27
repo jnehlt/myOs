@@ -13,5 +13,5 @@ Simple Operating system, created to understand how Os-es actually works.
 
 ### 27/01/2018 23:32 UPDATE
 -Now code is divided into several files. (it is quite messy, but I will clean this up to the next update )</br>
--Terminal looks to be finished (FINALLY!)</br>
+-Terminal almost finished</br>
 -Now time to implement GDT and IDT</br>
