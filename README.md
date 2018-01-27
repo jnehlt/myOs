@@ -15,4 +15,3 @@ Simple Operating system, created to understand how Os-es actually works.
 -Now code is divided into several files. (it is quite messy yet, but I will clean this up to the next update )</br>
 -Terminal looks to be finished (FINALLY!)</br>
 -Now time to implement GDT and IDT</br>
--
