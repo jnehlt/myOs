@@ -12,6 +12,7 @@ Simple Operating system, created to understand how Os-es actually works.
 |[linker.ld](https://github.com/sebastianbakala/myOs/blob/master/linker.ld)   |For gcc cross-compiler to link boot.o, and kernel.o together. It produces kernel.bin. ELF look-alike</br>Freestanding gcc call:</br>`i686-elf-gcc -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc`|
 
 ## 27/01/2018 23:32 UPDATE
--Now code is divided into several files. (it is quite messy yet, but I will clean this up to the next update )
--Terminal looks to be finished (FINALLY!)
--Now time to implement GDT and IDT
+-Now code is divided into several files. (it is quite messy yet, but I will clean this up to the next update )</br>
+-Terminal looks to be finished (FINALLY!)</br>
+-Now time to implement GDT and IDT</br>
+-
