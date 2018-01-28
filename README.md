@@ -4,7 +4,7 @@ Simple Operating system, created for my own pleasure, just to understand how Os-
 * [OSDev](http://wiki.osdev.org/Main_Page). Base for my work.
 * [Bran's Kernel Development](http://www.osdever.net/bkerndev/index.php). Additional information
 * [Extended](http://www.cs.vu.nl/~herbertb/misc/writingkernels.txt).
-* Also other priceless knowledge from [ieeexplore](http://ieeexplore.ieee.org/Xplore/home.jsp?reload=true) and [Google](https://google.com)]
+* Also other priceless knowledge from [ieeexplore](http://ieeexplore.ieee.org/Xplore/home.jsp?reload=true) and [Google](https://google.com)
 
 |Filename    |Description                       |
 |------------|----------------------------------|
